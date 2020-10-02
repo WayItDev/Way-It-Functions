@@ -3,7 +3,7 @@
 var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault')
 
 Object.defineProperty(exports, '__esModule', {
-  value: true,
+    value: true,
 })
 exports['default'] = void 0
 
@@ -11,17 +11,25 @@ var _morgan = _interopRequireDefault(require('morgan'))
 
 var _express = _interopRequireDefault(require('express'))
 
+var _firebase = _interopRequireDefault(require('firebase'))
+
+require('firebase/performance')
+
 var _cookieParser = _interopRequireDefault(require('cookie-parser'))
 
+var _config = _interopRequireDefault(require('./util/config'))
+
 var _index = _interopRequireDefault(require('./routes/index'))
+
+_firebase['default'].initializeApp(_config['default'])
 
 var app = (0, _express['default'])()
 app.use((0, _morgan['default'])('dev'))
 app.use(_express['default'].json())
 app.use(
-  _express['default'].urlencoded({
-    extended: true,
-  })
+    _express['default'].urlencoded({
+        extended: true,
+    })
 )
 app.use((0, _cookieParser['default'])())
 app.use('/api/v1', _index['default'])

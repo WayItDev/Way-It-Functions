@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+// eslint-disable-next-line import/no-unresolved
 'use strict'
 
 var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault')
@@ -17,19 +18,19 @@ var _app = _interopRequireDefault(require('../app'))
  * Normalize a port into a number, string, or false.
  */
 var normalizePort = function normalizePort(val) {
-  var port = parseInt(val, 10)
+    var port = parseInt(val, 10)
 
-  if (Number.isNaN(port)) {
-    // named pipe
-    return val
-  }
+    if (Number.isNaN(port)) {
+        // named pipe
+        return val
+    }
 
-  if (port >= 0) {
-    // port number
-    return port
-  }
+    if (port >= 0) {
+        // port number
+        return port
+    }
 
-  return false
+    return false
 }
 /**
  * Get port from environment and store in Express.
@@ -48,37 +49,39 @@ var server = _http['default'].createServer(_app['default'])
  */
 
 var onError = function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error
-  }
+    if (error.syscall !== 'listen') {
+        throw error
+    }
 
-  var bind =
-    typeof port === 'string' ? 'Pipe '.concat(port) : 'Port '.concat(port) // handle specific listen errors with friendly messages
+    var bind =
+        typeof port === 'string' ? 'Pipe '.concat(port) : 'Port '.concat(port) // handle specific listen errors with friendly messages
 
-  switch (error.code) {
-    case 'EACCES':
-      console.log(''.concat(bind, ' requires elevated privileges'))
-      process.exit(1)
-      break
+    switch (error.code) {
+        case 'EACCES':
+            console.log(''.concat(bind, ' requires elevated privileges'))
+            process.exit(1)
+            break
 
-    case 'EADDRINUSE':
-      console.log(''.concat(bind, ' is already in use'))
-      process.exit(1)
-      break
+        case 'EADDRINUSE':
+            console.log(''.concat(bind, ' is already in use'))
+            process.exit(1)
+            break
 
-    default:
-      throw error
-  }
+        default:
+            throw error
+    }
 }
 /**
  * Event listener for HTTP server "listening" event.
  */
 
 var onListening = function onListening() {
-  var addr = server.address()
-  var bind =
-    typeof addr === 'string' ? 'pipe '.concat(addr) : 'port '.concat(addr.port)
-  ;(0, _debug['default'])('Listening on '.concat(bind))
+    var addr = server.address()
+    var bind =
+        typeof addr === 'string'
+            ? 'pipe '.concat(addr)
+            : 'port '.concat(addr.port)
+    ;(0, _debug['default'])('Listening on '.concat(bind))
 }
 /**
  * Listen on provided port, on all network interfaces.

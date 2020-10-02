@@ -4,14 +4,14 @@ Object.defineProperty(exports, '__esModule', {
     value: true,
 })
 
-var _fbAuth = require('./fbAuth')
+var _helperFunctions = require('./helperFunctions')
 
-Object.keys(_fbAuth).forEach(function (key) {
+Object.keys(_helperFunctions).forEach(function (key) {
     if (key === 'default' || key === '__esModule') return
     Object.defineProperty(exports, key, {
         enumerable: true,
         get: function get() {
-            return _fbAuth[key]
+            return _helperFunctions[key]
         },
     })
 })

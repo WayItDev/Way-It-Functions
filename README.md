@@ -20,92 +20,134 @@
 
 ```json
 {
-    "routes": {
-      "name": {
-          "value": "Fresh Market",
-          "type": "string",
-          "description": "Name of the route"
-      },
-      "user": {
-        "value": "Henk",
-        "type": "string",
-        "description": "Name of the user who made it"
-      },
-      "Description": {
-        "value": "The restaurant has an extensive selection of fresh fish flown in daily from the Sea of Japan as well as both the Atlantic and Pacific oceans.",
-        "type": "string",
-        "description": "The description of the route"
-      },
-      "Date": {
-        "value": "2020-09-23T12:30:00.000Z",
-        "type": "timestamp",
-        "description": "The date when the route was taken"
-      },
-      "Distance": {
-        "value": ["14", "mil/km"],
-        "type": "number",
-        "description": "The distance made of the route in kilometers or miles"
-      },
-      "Duration": {
-        "value": ["12", "min"],
-        "type": "number",
-        "description": "The duration that it took to make the route in minutes"
-      },
-      "Images": {
-        "value": [
-            "https://firebase.storage.com",
-            "https://firebase.storage.com",
-            "https://firebase.storage.com"
-        ],
-        "type": ["array", "string"],
-        "description": "The images made in the route with a image url to the firebase storage"
-      },
-      "coordinates": {
-        "value": [
-            [37.8025259, -122.4351431],
-            [37.7896386, -122.421646],
-            [37.7665248, -122.4161628],
-            [37.7734153, -122.4577787],
-            [37.7948605, -122.4596065],
-            [37.8025259, -122.4351431]
-        ],
-        "type": ["array", "geopoint"],
-        "description": "The geo locations of the route with lat and long"
-      }
+  "routes": {
+    "name": {
+      "value": "Fresh Market",
+      "type": "string",
+      "description": "Name of the route"
     },
-    "users": {
-      "username": {
-          "value": "Henk",
-          "type": "string",
-          "description": "Name of the user"
-      },
-      "email": {
-        "value": "Henn@gmail.com",
-        "type": "string",
-        "description": "The email of the user"
-      },
-      "userId": {
-        "value": "fOmfPUKfZsMogR02MQwtbNzeQWP2",
-        "type": "string",
-        "description": "The id of the user"
-      },
-      "createdAt": {
-        "value": "2020-09-22T18:08:07.311Z",
-        "type": "string",
-        "description": "The date and time when the document was created"
-      }
+    "user": {
+      "value": "Henk",
+      "type": "string",
+      "description": "Name of the user who made it"
     },
-    "config": {
-      "theme": {
-          "value": "Light or Dark",
-          "type": "string",
-          "description": "The theme for the app Light or Dark"
+    "description": {
+      "value": "The restaurant has an extensive selection of fresh fish flown in daily from the Sea of Japan as well as both the Atlantic and Pacific oceans.",
+      "type": "string",
+      "description": "The description of the route"
+    },
+    "begindate": {
+      "value": "2020-09-23T12:30:00.000Z",
+      "type": "timestamp",
+      "description": "The date when the route was begun"
+    },
+    "enddate": {
+      "value": "2020-09-23T13:00:00.000Z",
+      "type": "timestamp",
+      "description": "The date when the route was ended"
+    },
+    "distance": {
+      "value": ["14", "mil/km"],
+      "type": "number",
+      "description": "The distance made of the route in kilometers or miles"
+    },
+    "duration": {
+      "value": ["12", "min"],
+      "type": "number",
+      "description": "The duration that it took to make the route in minutes"
+    },
+    "calorie": {
+      "value": ["501", "cal"],
+      "type": "number",
+      "description": "Hoeveel calorien je verbrand in de route"
+    },
+    "images": {
+      "value": [
+        "https://firebase.storage.com",
+        "https://firebase.storage.com",
+        "https://firebase.storage.com"
+      ],
+      "type": ["array", "string"],
+      "description": "The images made in the route with a image url to the firebase storage"
+    },
+    "coordinates": {
+      "value": [
+        [37.8025259, -122.4351431],
+        [37.7896386, -122.421646],
+        [37.7665248, -122.4161628],
+        [37.7734153, -122.4577787],
+        [37.7948605, -122.4596065],
+        [37.8025259, -122.4351431]
+      ],
+      "type": ["array", "geopoint"],
+      "description": "The geo locations of the route with lat and long"
+    },
+    "camera": {
+      "value": {
+        "coordinate": [37.7734153, -122.4577787]
       },
-      "metrics": {
-        "value": "km or mil",
-        "type": "string",
-        "description": "The metric for the distance"
-      }
+      "type": "geopoint",
+      "description": "The coordiantes of the middle of the screen for the camera"
+    }
+  },
+  "users": {
+    "username": {
+      "value": "Henk",
+      "type": "string",
+      "description": "Name of the user"
+    },
+    "email": {
+      "value": "Henn@gmail.com",
+      "type": "string",
+      "description": "The email of the user"
+    },
+    "userId": {
+      "value": "fOmfPUKfZsMogR02MQwtbNzeQWP2",
+      "type": "string",
+      "description": "The id of the user"
+    },
+    "createdAt": {
+      "value": "2020-09-22T18:08:07.311Z",
+      "type": "string",
+      "description": "The date and time when the document was created"
+    },
+    "image": {
+      "value": "https://firebase.storage.com",
+      "type": "string",
+      "description": "The profile image url to the firebase storage"
+    }, 
+    "gender": {
+      "value": "men",
+      "type": "string",
+      "description": "The gender of the user"
+    },
+    "calorieenperweek": {
+      "value": ["1567", "cal"],
+      "type": "number",
+      "desciption": "Calorieen of the user in a week"
+    },
+    "calorieen": {
+      "value": ["27892", "cal"],
+      "type": "number",
+      "description": "Calorieen of the user all times"
+    },
+    "waypoints": {
+      "value": "2",
+      "type": "number",
+      "description": "The amount of waypoint the user has"
+    }
+  },
+  "config": {
+    "theme": {
+      "value": "true",
+      "type": "boolean",
+      "description": "The condition is the theme light then true is the theme dark then false"
+    },
+    "metrics": {
+      "value": "km or mil",
+      "type": "string",
+      "description": "The metric for the distance"
     }
   }
+}
 ```
