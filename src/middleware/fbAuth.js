@@ -1,13 +1,12 @@
 import { admin, db } from '../util/admin'
 
-/* eslint consistent-return: "off" */
 export const FBAuth = (req, res, next) => {
     let idToken
     if (
         req.headers.authorization
         && req.headers.authorization.startsWith('Bearer ')
     ) {
-        /* eslint prefer-destructuring: "off" */
+        // eslint-disable-next-line prefer-destructuring
         idToken = req.headers.authorization.split('Bearer ')[1]
     } else {
         return res.status(403).json({ error: 'Unauthorized' })
@@ -26,6 +25,7 @@ export const FBAuth = (req, res, next) => {
         })
         .then((data) => {
             req.user.username = data.docs[0].data().username
+            req.user.imageUrl = data.docs[0].data().imageUrl
             return next()
         })
         .catch((err) => res.status(403).json(err))

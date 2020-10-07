@@ -3,7 +3,7 @@ import serviceAccount from '../../serviceAccountKey.json'
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://way-it-d7235.firebaseio.com',
+    databaseURL: process.env.DATABASE_URL,
 })
 
 const db = admin.firestore()

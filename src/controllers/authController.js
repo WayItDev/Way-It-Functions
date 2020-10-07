@@ -2,6 +2,7 @@ import firebase from 'firebase'
 
 import { db } from '../util/admin'
 import { validateSignupData, validateLoginData } from '../lib/validators'
+import config from '../util/config'
 
 export const signUp = (req, res) => {
     const newUser = {
@@ -14,6 +15,8 @@ export const signUp = (req, res) => {
     const { valid, errors } = validateSignupData(newUser)
 
     if (!valid) return res.status(400).json(errors)
+
+    const noImg = 'no-img.png'
 
     let token
     let userId
@@ -39,6 +42,7 @@ export const signUp = (req, res) => {
                 username: newUser.username,
                 email: newUser.email,
                 createdAt: new Date().toISOString(),
+                imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${noImg}?alt=media`,
                 userId,
             }
             return db.doc(`/users/${newUser.username}`).set(userCredentials)
@@ -56,7 +60,7 @@ export const signUp = (req, res) => {
         })
 }
 
-exports.login = (req, res) => {
+export const login = (req, res) => {
     const user = {
         email: req.body.email,
         password: req.body.password,

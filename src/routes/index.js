@@ -1,5 +1,6 @@
 import express from 'express'
 import { signUp, login, uploadImage } from '../controllers'
+import FBAuth from '../middleware/fbAuth'
 
 const indexRouter = express.Router()
 
