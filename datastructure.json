@@ -100,12 +100,12 @@
             "type": "string",
             "description": "The gender of the user"
         },
-        "calorieenperweek": {
+        "caloriePerWeek": {
             "value": ["1567", "cal"],
             "type": "number",
             "desciption": "Calorieen of the user in a week"
         },
-        "calorieen": {
+        "calorie": {
             "value": ["27892", "cal"],
             "type": "number",
             "description": "Calorieen of the user all times"

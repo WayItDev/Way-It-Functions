@@ -8,18 +8,22 @@ import config from '../util/config'
 
 export const uploadImage = (req, res) => {
     const busboy = new BusBoy({ headers: req.headers })
-
     let imageToBeUploaded = {}
     let imageFileName
-
+    req.pipe(busboy)
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-        // my.image.png => ['my', 'image', 'png']
+        if (
+            mimetype !== 'image/jpeg'
+            && mimetype !== 'image/jpg'
+            && mimetype !== 'image/png'
+        ) {
+            return res.status(400).json({ error: 'Wrong file type submitted' })
+        }
         const imageExtension = filename.split('.')[
             filename.split('.').length - 1
         ]
-        // 32756238461724837.png
         imageFileName = `${Math.round(
-            Math.random() * 100000000000000
+            Math.random() * 1000000000000000
         ).toString()}.${imageExtension}`
         const filepath = path.join(os.tmpdir(), imageFileName)
         imageToBeUploaded = { filepath, mimetype }
@@ -43,7 +47,7 @@ export const uploadImage = (req, res) => {
                     .doc(`/users/${req.user.username}`)
                     .update({ imageUrl })
             })
-            .then(() => res.json({ message: 'Image uploaded successfully' }))
-            .catch((err) => res.status(500).json({ error: err.code }))
+            .then(() => res.json({ message: 'image uploaded succesfully' }))
+            .catch(() => res.status(500).json({ error: 'something went wrong' }))
     })
 }
