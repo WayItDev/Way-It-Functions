@@ -32,13 +32,9 @@ const validateLoginData = (data) => {
 }
 
 const reduceUserDetails = (data) => {
-    let userDetails = {}
+    const userDetails = {}
 
     if (!isEmpty(data.gender.trim())) userDetails.gender = data.gender
-    if (!isEmpty(data.caloriePerWeek.trim())) userDetails.caloriePerWeek = data.caloriePerWeek
-    if (!isEmpty(data.calorie.trim())) userDetails.calorie = data.calorie
-    if (!isEmpty(data.waypoints.trim())) userDetails.waypoints = data.waypoints
-
     return userDetails
 }
 

@@ -6,6 +6,95 @@ import fs from 'fs'
 import { admin, db } from '../util/admin'
 import config from '../util/config'
 
+export const getAuthenticatedUser = (req, res) => {
+    const userData = {}
+    db.doc(`/users/${req.user.username}`)
+        .get()
+        .then((doc) => {
+            if (doc.exists) {
+                userData.credentials = doc.data()
+            }
+            return res.json(userData)
+        })
+        .catch((err) => res.status(500).json({ error: err.code }))
+}
+
+export const addUserDetails = (req, res) => {
+    const user = {
+        gender: req.body.gender,
+        waypoints: req.body.waypoints,
+        calorie: req.body.calorie,
+        calorieWeek: req.body.calorieWeek,
+    }
+    const userDetails = {}
+    if (user.gender.trim() !== '') userDetails.gender = user.gender
+    if (user.waypoints !== null) userDetails.waypoints = user.waypoints
+    if (user.calorie !== null) userDetails.calorie = user.calorie
+    if (user.calorieWeek !== null) userDetails.calorieWeek = user.calorieWeek
+    db.doc(`/users/${req.params.username}`)
+        .update(userDetails)
+        .then(() => {
+            res.status(200).json({ message: 'Details added succesfully' })
+        })
+        .catch((err) => {
+            res.status(500).json({ error: err })
+        })
+}
+
+export const getAllUsers = (req, res) => {
+    db.collection('users')
+        .get()
+        .then((querySnapshot) => {
+            const docs = []
+            querySnapshot.forEach((doc) => {
+                docs.push({ id: doc.id, ...doc.data() })
+            })
+            res.json({ docs })
+        })
+        .catch((err) => {
+            res.status(500).json({ error: err })
+        })
+}
+
+export const getUserDetails = (req, res) => {
+    const userData = {}
+    db.doc(`/users/${req.params.username}`)
+        .get()
+        .then((doc) => {
+            if (doc.exists) {
+                userData.user = doc.data()
+                return db
+                    .collection('routes')
+                    .where('username', '==', req.params.username)
+                    .get()
+            } res.status(404).json({ error: 'User not found' })
+        })
+        .then((data) => {
+            userData.routes = []
+            data.forEach((doc) => {
+                userData.routes.push(doc.data())
+            })
+            return db
+                .collection('settings')
+                .where('username', '==', req.params.username)
+                .get()
+        })
+        .then((data) => {
+            userData.settings = []
+            data.forEach((doc) => {
+                userData.settings.push({
+                    theme: doc.data().theme,
+                    metrics: doc.data().metrics,
+                    id: doc.id
+                })
+            })
+        })
+        .then(() => {
+            res.status(200).json(userData)
+        })
+        .catch((err) => res.status(500).json({ error: err }))
+}
+
 export const uploadImage = (req, res) => {
     const busboy = new BusBoy({ headers: req.headers })
     let imageToBeUploaded = {}
